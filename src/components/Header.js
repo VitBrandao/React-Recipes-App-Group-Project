@@ -1,38 +1,44 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import profileIcon from '../images/profileIcon.svg';
+import searchIcon from '../images/searchIcon.svg';
 
-function Header({ history }) {
-  const redirectToProfilePage = () => (history.push('/profile'));
+function Header({ showSearchButton }) {
   const [showSearchInput, setShowSearchInput] = useState(false);
 
   return (
     <div>
-      <button
-        type="button"
+      <a
+        href="/profile"
         data-testid="profile-top-btn"
-        onClick={ redirectToProfilePage }
+        src={ profileIcon }
       >
-        Profile
-      </button>
+        <img href="/profile" src={ profileIcon } alt="Profile Button" />
+      </a>
 
       <h1 data-testid="page-title"> App De Receitas </h1>
 
-      <button
-        type="button"
-        data-testid="search-top-btn"
-        onClick={ () => setShowSearchInput(!showSearchInput) }
-      >
-        Search
-      </button>
+      {showSearchButton && (
+        <button
+          type="button"
+          data-testid="search-top-btn"
+          onClick={ () => setShowSearchInput(!showSearchInput) }
+          src={ searchIcon }
+        >
+          <img src={ searchIcon } alt="Search Button" />
+        </button>
+      )}
       {showSearchInput ? <input data-testid="search-input" /> : null}
     </div>
   );
 }
 
 Header.propTypes = {
-  history: PropTypes.shape({
-    push: PropTypes.func,
-  }).isRequired,
+  showSearchButton: PropTypes.bool,
+};
+
+Header.defaultProps = {
+  showSearchButton: true,
 };
 
 export default Header;

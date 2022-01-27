@@ -3,9 +3,11 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import DetailsPage from '../pages/DetailsPage';
 import DoneRecipesPage from '../pages/DoneRecipesPage';
 import DrinksPage from '../pages/DrinksPage';
-import ExploreDrinksOrFoodsPage from '../pages/ExploreDrinksOrFoodsPage';
+import ExploreDrinksPage from '../pages/ExploreDrinksPage';
+import ExploreFoodsPage from '../pages/ExploreFoodsPage';
 import ExploreFoodsNationalitiesPage from '../pages/ExploreFoodsNationalitiesPage';
-import ExploreIngridientsPage from '../pages/ExploreIngredientsPage';
+import ExploreIngridientsByFoodPage from '../pages/ExploreIngridientsByFoodPage';
+import ExploreIngridientsByDrinkPage from '../pages/ExploreIngridientsByDrinkPage';
 import ExplorePage from '../pages/ExplorePage';
 import FavoriteRecipes from '../pages/FavoriteRecipesPage';
 import FoodsPage from '../pages/FoodsPage';
@@ -26,17 +28,17 @@ const Routes = () => (
       <Route exact path="/done-recipes" component={ DoneRecipesPage } />
       <Route exact path="/favorite-recipes" component={ FavoriteRecipes } />
       <Route exact path="/explore" component={ ExplorePage } />
-      <Route exact path="/explore/foods" component={ ExploreDrinksOrFoodsPage } />
-      <Route exact path="/explore/drinks" component={ ExploreDrinksOrFoodsPage } />
+      <Route exact path="/explore/foods" component={ ExploreFoodsPage } />
+      <Route exact path="/explore/drinks" component={ ExploreDrinksPage } />
       <Route
         exact
         path="/explore/foods/ingredients"
-        component={ ExploreIngridientsPage }
+        component={ ExploreIngridientsByFoodPage }
       />
       <Route
         exact
         path="/explore/drinks/ingredients"
-        component={ ExploreIngridientsPage }
+        component={ ExploreIngridientsByDrinkPage }
       />
       <Route
         exact
