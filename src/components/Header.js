@@ -1,13 +1,35 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-function Header() {
+function Header({ history }) {
+  const redirectToProfilePage = () => (history.push('/profile'));
+
   return (
     <div>
-      <button type="button" data-testid="profile-top-btn"> Profile </button>
+      <button
+        type="button"
+        data-testid="profile-top-btn"
+        onClick={ redirectToProfilePage }
+      >
+        Profile
+      </button>
+
       <h1 data-testid="page-title"> App De Receitas </h1>
-      <button type="button" data-testid="search-top-btn"> Search </button>
+
+      <button
+        type="button"
+        data-testid="search-top-btn"
+      >
+        Search
+      </button>
     </div>
   );
 }
+
+Header.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
+};
 
 export default Header;
