@@ -11,6 +11,11 @@ const LoginPage = () => {
     return true;
   };
 
+  const handleButtonClick = () => {
+    localStorage.setItem('mealsToken', 1);
+    localStorage.setItem('cocktailsToken', 1);
+  };
+
   return (
     <div>
       <input
@@ -29,6 +34,7 @@ const LoginPage = () => {
         type="button"
         data-testid="login-submit-btn"
         disabled={ checkInputs() }
+        onClick={ handleButtonClick }
       >
         Enter
       </button>
