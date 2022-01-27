@@ -1,8 +1,11 @@
 import React from 'react';
+import RootProvider from './contexts/RootProvider';
 import Routes from './Routes';
 
 const App = () => (
-  <Routes />
+  <RootProvider>
+    <Routes />
+  </RootProvider>
 );
 
 export default App;
