@@ -1,11 +1,11 @@
 import React from 'react';
 import Header from '../components/Header';
 
-const DoneRecipesPage = () => (
+const ExploreFoodsPage = () => (
   <div>
     <Header showSearchButton={ false } />
-    <h1 data-testid="page-title">Done Recipes</h1>
+    <h1 data-testid="page-title">Explore Foods</h1>
   </div>
 );
 
-export default DoneRecipesPage;
+export default ExploreFoodsPage;

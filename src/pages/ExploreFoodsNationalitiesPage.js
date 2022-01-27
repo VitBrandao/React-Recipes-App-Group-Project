@@ -1,8 +1,10 @@
 import React from 'react';
+import Header from '../components/Header';
 
 const ExploreFoodsNationalitiesPage = () => (
   <div>
-    Tela de explorar comidas por nacionalidade
+    <Header />
+    <h1 data-testid="page-title">Explore Nationalities</h1>
   </div>
 );
 
