@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 function Header({ history }) {
   const redirectToProfilePage = () => (history.push('/profile'));
+  const [showSearchInput, setShowSearchInput] = useState(false);
 
   return (
     <div>
@@ -19,9 +20,11 @@ function Header({ history }) {
       <button
         type="button"
         data-testid="search-top-btn"
+        onClick={ () => setShowSearchInput(!showSearchInput) }
       >
         Search
       </button>
+      {showSearchInput ? <input data-testid="search-input" /> : null}
     </div>
   );
 }
