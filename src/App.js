@@ -1,11 +1,18 @@
 import React from 'react';
-import RootProvider from './contexts/RootProvider';
-import Routes from './Routes';
+import { Switch } from 'react-router-dom';
+import RecipesProvider from './contexts/RecipesProvider';
+import Routes from './Routes/index';
 
-const App = () => (
-  <RootProvider>
-    <Routes />
-  </RootProvider>
-);
+function App() {
+  return (
+    <div>
+      <RecipesProvider>
+        <Switch>
+          <Routes />
+        </Switch>
+      </RecipesProvider>
+    </div>
+  );
+}
 
 export default App;

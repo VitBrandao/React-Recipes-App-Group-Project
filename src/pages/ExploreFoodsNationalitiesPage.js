@@ -3,7 +3,7 @@ import Header from '../components/Header';
 
 const ExploreFoodsNationalitiesPage = () => (
   <div>
-    <Header />
+    <Header showSearchButton />
     <h1 data-testid="page-title">Explore Nationalities</h1>
   </div>
 );
