@@ -4,6 +4,7 @@ import Cards from '../components/Cards';
 import defaultApi from '../services/index';
 import Header from '../components/Header';
 import RecipesContext from '../contexts/RecipesContext';
+import Footer from '../components/Footer';
 
 const types = {
   meals: {
@@ -104,6 +105,7 @@ function MainRecipes({ location: { pathname }, history: { push } }) {
           {createCards(recipes, currType, push, searchURL)}
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
