@@ -7,6 +7,7 @@ function Cards({ img, name, index, onClick }) {
       type="button"
       data-testid={ `${index}-recipe-card` }
       onClick={ onClick }
+      style={ { width: '20%' } }
     >
       <img
         src={ img }

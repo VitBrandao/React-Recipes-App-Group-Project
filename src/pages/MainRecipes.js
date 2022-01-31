@@ -101,7 +101,7 @@ function MainRecipes({ location: { pathname }, history: { push } }) {
         <div>
           {createCategories(categories)}
         </div>
-        <div>
+        <div style={ { display: 'flex', flexWrap: 'wrap' } }>
           {createCards(recipes, currType, push, searchURL)}
         </div>
       </div>
