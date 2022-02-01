@@ -1,12 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom/cjs/react-router-dom.min';
+import { ChakraProvider } from '@chakra-ui/react';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <BrowserRouter>
-    <App />
+    <ChakraProvider>
+      <App />
+    </ChakraProvider>
   </BrowserRouter>,
   document.getElementById('root'),
 );
