@@ -7,12 +7,15 @@ import {
   ListItem,
   OrderedList,
   Text,
+  useToast,
 } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
+import copy from 'clipboard-copy';
 import ButtonStartRecipe from '../components/ButtonStartRecipe';
 import Recomendations from '../components/Recomendations';
 import defaultApi from '../services';
+import shareIcon from '../images/shareIcon.svg';
 
 const types = {
   meals: {
@@ -40,6 +43,13 @@ const DetailsPage = () => {
     pathname.split('/')[1] === 'foods' ? 'meals' : 'drinks'
   );
   const doneRecipe = doneRecipes.some(({ id: idRecipe }) => id === idRecipe);
+  const toastLink = useToast({
+    title: 'Link copied!',
+    status: 'success',
+    description: 'Link copiado com sucesso!',
+    duration: 3000,
+    isClosable: true,
+  });
 
   useEffect(() => {
     let URL;
@@ -50,7 +60,7 @@ const DetailsPage = () => {
     }
     defaultApi(URL)
       .then((response) => setCurrentRecipe(response[recipeType][0]));
-  }, []);
+  }, [id, recipeType]);
 
   const ingredients = [];
   const MAX_NUMBER_INGREDIENTS = 20;
@@ -65,6 +75,11 @@ const DetailsPage = () => {
       ingredients.push(ingredientAndMeasure);
     }
   }
+
+  const handleShareButton = () => {
+    copy(global.location.href)
+      .then(() => toastLink());
+  };
 
   return (
     <Container overflow="hidden" maxW="full" p="0">
@@ -110,7 +125,9 @@ const DetailsPage = () => {
           ))
         }
       </OrderedList>
-      <Button data-testid="share-btn" />
+      <Button data-testid="share-btn" onClick={ handleShareButton }>
+        <img src={ shareIcon } alt="share" />
+      </Button>
       <Button data-testid="favorite-btn" />
       <Text data-testid="instructions">{ currentRecipe?.strInstructions }</Text>
       <Text>Recomendações:</Text>

@@ -1,8 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from '@chakra-ui/react';
+import { useHistory, useLocation } from 'react-router-dom';
 
 const ButtonStartRecipe = ({ id, recipeType }) => {
+  const history = useHistory();
+  const { pathname } = useLocation();
   const recipesInProgress = JSON.parse(localStorage.getItem('inProgressRecipes')) || {};
   const recipesInProgressByType = recipesInProgress?.[recipeType];
   let textButton = 'Start';
@@ -13,6 +16,8 @@ const ButtonStartRecipe = ({ id, recipeType }) => {
     if (inProgress) textButton = 'Continue';
   }
 
+  console.log(global.location.href);
+
   return (
     <Button
       position="fixed"
@@ -21,6 +26,7 @@ const ButtonStartRecipe = ({ id, recipeType }) => {
       width="full"
       colorScheme="green"
       borderRadius="0"
+      onClick={ () => history.push(`${pathname}/in-progress`) }
     >
       { `${textButton} Recipe` }
     </Button>
