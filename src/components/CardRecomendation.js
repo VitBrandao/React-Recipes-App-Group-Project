@@ -28,16 +28,16 @@ const types = {
 const CardRecomendation = ({ recomendation, index, recipeType }) => (
   <Flex
     data-testid={ `${index}-recomendation-card` }
-    width="55vw"
-    height="20vh"
+    width="70vw"
+    height="40vh"
     flexDir="column"
     justifyContent="center"
     textAlign="center"
-    p="4"
   >
     <Image
       src={ recomendation[types[recipeType].thumbType] }
       height="90%"
+      data-testid={ `${index}-recomendation-image` }
     />
     <Text data-testid={ `${index}-recomendation-title` }>
       { recomendation[types[recipeType].nameType] }

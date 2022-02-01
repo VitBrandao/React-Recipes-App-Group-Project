@@ -19,7 +19,7 @@ const Recomendations = () => {
     }
     defaultApi(URL)
       .then((response) => setRecomendations(response[recipeType]));
-  }, []);
+  }, [recipeType]);
 
   const SIX = 6;
   const firstSixRecomendations = recomendations.filter((_item, i) => i < SIX);

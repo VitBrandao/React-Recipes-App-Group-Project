@@ -4,8 +4,6 @@ import {
   Container,
   Heading,
   Image,
-  ListItem,
-  OrderedList,
   Text,
   useToast,
 } from '@chakra-ui/react';
@@ -16,6 +14,8 @@ import ButtonStartRecipe from '../components/ButtonStartRecipe';
 import Recomendations from '../components/Recomendations';
 import defaultApi from '../services';
 import shareIcon from '../images/shareIcon.svg';
+import ButtonFavoriteRecipe from '../components/ButtonFavoriteRecipe';
+import IngredientsList from '../components/IngredientsList';
 
 const types = {
   meals: {
@@ -62,36 +62,35 @@ const DetailsPage = () => {
       .then((response) => setCurrentRecipe(response[recipeType][0]));
   }, [id, recipeType]);
 
-  const ingredients = [];
-  const MAX_NUMBER_INGREDIENTS = 20;
-
-  for (let i = 1; i <= MAX_NUMBER_INGREDIENTS; i += 1) {
-    const currIngredient = `strIngredient${i}`;
-    const currMeasure = `strMeasure${i}`;
-    if (currentRecipe?.[currIngredient]) {
-      const ingredientAndMeasure = (
-        `${currentRecipe?.[currIngredient]} - ${currentRecipe?.[currMeasure]}`
-      );
-      ingredients.push(ingredientAndMeasure);
-    }
-  }
-
   const handleShareButton = () => {
     copy(global.location.href)
       .then(() => toastLink());
   };
 
+  const currentRecipeName = currentRecipe?.[types[recipeType].nameType];
+  const currentRecipeImage = currentRecipe?.[types[recipeType].thumbType];
+
+  const recipeObject = {
+    id,
+    type: recipeType === 'meals' ? 'food' : 'drink',
+    nationality: currentRecipe?.strArea || '',
+    category: currentRecipe?.strCategory ? currentRecipe.strCategory : '',
+    alcoholicOrNot: currentRecipe?.strAlcoholic ? currentRecipe?.strAlcoholic : '',
+    name: currentRecipeName || '',
+    image: currentRecipeImage || '',
+  };
+
   return (
     <Container overflow="hidden" maxW="full" p="0">
       <Image
-        src={ currentRecipe?.[types[recipeType].thumbType] }
+        src={ currentRecipeImage }
         data-testid="recipe-photo"
         maxH="35vh"
         width="full"
       />
       <Heading m="2">
         <Text data-testid="recipe-title">
-          { currentRecipe?.[types[recipeType].nameType] }
+          { currentRecipeName }
         </Text>
         <Badge
           data-testid="recipe-category"
@@ -112,23 +111,11 @@ const DetailsPage = () => {
           </Badge>
         ) }
       </Heading>
-      <OrderedList m="4">
-        {
-          ingredients.map((ingredient, index) => (
-            <ListItem
-              marginLeft="8"
-              key={ index }
-              data-testid={ `${index}-ingredient-name-and-measure` }
-            >
-              { ingredient }
-            </ListItem>
-          ))
-        }
-      </OrderedList>
+      <IngredientsList currentRecipe={ currentRecipe } />
       <Button data-testid="share-btn" onClick={ handleShareButton }>
-        <img src={ shareIcon } alt="share" />
+        <img src={ shareIcon } alt="share recipe" />
       </Button>
-      <Button data-testid="favorite-btn" />
+      <ButtonFavoriteRecipe recipe={ recipeObject } />
       <Text data-testid="instructions">{ currentRecipe?.strInstructions }</Text>
       <Text>Recomendações:</Text>
       <Recomendations />
