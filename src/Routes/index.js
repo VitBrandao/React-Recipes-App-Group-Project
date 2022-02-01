@@ -8,7 +8,7 @@ import ExploreFoodsNationalitiesPage from '../pages/ExploreFoodsNationalitiesPag
 import ExploreIngridientsByFoodPage from '../pages/ExploreIngridientsByFoodPage';
 import ExploreIngridientsByDrinkPage from '../pages/ExploreIngridientsByDrinkPage';
 import ExplorePage from '../pages/ExplorePage';
-import FavoriteRecipes from '../pages/FavoriteRecipesPage';
+import FavoriteRecipesPage from '../pages/FavoriteRecipesPage';
 import InProgressPage from '../pages/InProgressPage';
 import LoginPage from '../pages/LoginPage';
 import ProfilePage from '../pages/ProfilePage';
@@ -24,7 +24,7 @@ const Routes = () => (
     <Route exact path="/foods/:id/in-progress" component={ InProgressPage } />
     <Route exact path="/drinks/:id/in-progress" component={ InProgressPage } />
     <Route exact path="/done-recipes" component={ DoneRecipesPage } />
-    <Route exact path="/favorite-recipes" component={ FavoriteRecipes } />
+    <Route exact path="/favorite-recipes" component={ FavoriteRecipesPage } />
     <Route exact path="/explore" component={ ExplorePage } />
     <Route exact path="/explore/foods" component={ ExploreFoodsPage } />
     <Route exact path="/explore/drinks" component={ ExploreDrinksPage } />

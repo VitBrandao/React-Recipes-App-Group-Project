@@ -59,8 +59,7 @@ function MainRecipes({ location: { pathname }, history: { push } }) {
     const { categoriesEndPoint } = currType;
 
     defaultApi(categoriesEndPoint)
-      .then(({ [currResult]: array }) => setCategories(array.slice(0, categoryLenght)))
-      .catch((e) => console.log(e));
+      .then(({ [currResult]: array }) => setCategories(array.slice(0, categoryLenght)));
   }, [currType, currResult]);
 
   useEffect(() => {
@@ -72,8 +71,7 @@ function MainRecipes({ location: { pathname }, history: { push } }) {
 
     defaultApi(URL)
       .then(({ [currResult]: array }) => (array === null ? notFoundAlert()
-        : setRecipes(array.slice(0, optionsLength))))
-      .catch((e) => console.log(e));
+        : setRecipes(array.slice(0, optionsLength))));
   }, [currType, currCategory, currResult, searchURL]);
 
   function createCategories(list) {
@@ -103,7 +101,7 @@ function MainRecipes({ location: { pathname }, history: { push } }) {
         <div>
           {createCategories(categories)}
         </div>
-        <div style={ { display: 'flex', flexWrap: 'wrap' } }>
+        <div>
           {createCards(recipes, currType, push, searchURL)}
         </div>
       </div>
