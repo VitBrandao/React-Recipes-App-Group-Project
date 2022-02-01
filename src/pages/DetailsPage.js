@@ -10,14 +10,12 @@ import {
 } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
+import ButtonStartRecipe from '../components/ButtonStartRecipe';
 import Recomendations from '../components/Recomendations';
 import defaultApi from '../services';
 
 const types = {
   meals: {
-    defaultEndPoint: 'https://www.themealdb.com/api/json/v1/1/search.php?s=',
-    selectedEndPoint: 'https://www.themealdb.com/api/json/v1/1/filter.php?c=',
-    categoriesEndPoint: 'https://www.themealdb.com/api/json/v1/1/list.php?c=list',
     thumbType: 'strMealThumb',
     nameType: 'strMeal',
     idType: 'idMeal',
@@ -25,9 +23,6 @@ const types = {
     title: 'Foods',
   },
   drinks: {
-    defaultEndPoint: 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=',
-    selectedEndPoint: 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=',
-    categoriesEndPoint: 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list',
     thumbType: 'strDrinkThumb',
     nameType: 'strDrink',
     idType: 'idDrink',
@@ -134,16 +129,10 @@ const DetailsPage = () => {
       }
       {
         !doneRecipe && (
-          <Button
-            position="fixed"
-            bottom="0"
-            data-testid="start-recipe-btn"
-            width="full"
-            colorScheme="green"
-            borderRadius="0"
-          >
-            Start Recipe
-          </Button>
+          <ButtonStartRecipe
+            recipeType={ recipeType === 'drinks' ? 'cocktails' : 'meals' }
+            id={ id }
+          />
         )
       }
     </Container>
