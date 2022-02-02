@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Button } from '@chakra-ui/react';
 import { useParams } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import RecipeDetailContext from '../contexts/RecipeDetailContext';
 
-const ButtonFavoriteRecipe = ({ recipe }) => {
+const ButtonFavoriteRecipe = () => {
+  const { recipeObject: recipe } = useContext(RecipeDetailContext);
   const [favoritedRecipe, setFavoritedRecipe] = useState(false);
   const { id } = useParams();
 
@@ -32,7 +33,7 @@ const ButtonFavoriteRecipe = ({ recipe }) => {
   };
 
   return (
-    <Button onClick={ favoriteRecipe }>
+    <Button marginRight="2" onClick={ favoriteRecipe }>
       <img
         src={ favoritedIcon }
         alt="favorite recipe"
@@ -40,10 +41,6 @@ const ButtonFavoriteRecipe = ({ recipe }) => {
       />
     </Button>
   );
-};
-
-ButtonFavoriteRecipe.propTypes = {
-  recipe: PropTypes.objectOf(PropTypes.string).isRequired,
 };
 
 export default ButtonFavoriteRecipe;

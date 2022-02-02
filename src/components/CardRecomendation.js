@@ -28,7 +28,7 @@ const types = {
 const CardRecomendation = ({ recomendation, index, recipeType }) => (
   <Flex
     data-testid={ `${index}-recomendation-card` }
-    width="70vw"
+    width="40vh"
     height="40vh"
     flexDir="column"
     justifyContent="center"

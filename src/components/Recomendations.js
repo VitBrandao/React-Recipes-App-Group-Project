@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Box, Heading } from '@chakra-ui/react';
 import { useLocation } from 'react-router-dom';
 import defaultApi from '../services';
 import CardRecomendation from './CardRecomendation';
@@ -23,21 +24,23 @@ const Recomendations = () => {
 
   const SIX = 6;
   const firstSixRecomendations = recomendations.filter((_item, i) => i < SIX);
-  console.log(firstSixRecomendations);
 
   return (
-    <Carousel>
-      {
-        firstSixRecomendations.map((recomendation, index) => (
-          <CardRecomendation
-            key={ index }
-            index={ index }
-            recomendation={ recomendation }
-            recipeType={ recipeType }
-          />
-        ))
-      }
-    </Carousel>
+    <Box marginBottom="8">
+      <Heading marginLeft="6" fontSize="2xl">Recomendações:</Heading>
+      <Carousel>
+        {
+          firstSixRecomendations.map((recomendation, index) => (
+            <CardRecomendation
+              key={ index }
+              index={ index }
+              recomendation={ recomendation }
+              recipeType={ recipeType }
+            />
+          ))
+        }
+      </Carousel>
+    </Box>
   );
 };
 

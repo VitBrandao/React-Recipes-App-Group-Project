@@ -6,7 +6,7 @@ const Carousel = ({ children }) => (
   <Flex width="100%" overflowX="auto">
     {
       children.map((child, index) => (
-        <Box width="70vw" key={ index }>{ child }</Box>
+        <Box width="50vw" m="2" key={ index }>{ child }</Box>
       ))
     }
   </Flex>
