@@ -47,6 +47,7 @@ function FavoriteRecipesPage() {
   return (
     <div>
       <Header title="Receitas Favoritas" />
+      <h1 data-testid="page-title">Favorite Recipes</h1>
       <FavoriteRecipes
         handleClick={ handleClick }
         filteredFavoriteRecipes={ filteredFavoriteRecipes }
