@@ -9,7 +9,7 @@ const IngredientsListCheckbox = () => {
   const {
     currentRecipe,
     recipeObject: { type },
-    setRecipeDone,
+    setRecipeDoneFunc,
   } = useContext(RecipeDetailContext);
   const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes')) || {};
   const recipeType = type === 'food' ? 'meals' : 'cocktails';
@@ -49,7 +49,7 @@ const IngredientsListCheckbox = () => {
   if (type !== ''
   && ingredients.length === ingredientsChecked.length
   && inProgressRecipes?.[recipeType]?.[id]) {
-    setRecipeDone(true);
+    setRecipeDoneFunc(true);
   }
 
   if (ingredients.length === 0) {

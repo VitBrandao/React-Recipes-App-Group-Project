@@ -44,6 +44,8 @@ const RecipeDetailProvider = ({ children }) => {
   const currentRecipeName = currentRecipe?.[types[recipeType].nameType];
   const currentRecipeImage = currentRecipe?.[types[recipeType].thumbType];
 
+  const setRecipeDoneFunc = (bool) => setRecipeDone(bool);
+
   const recipeObject = {
     id,
     type: recipeType === 'meals' ? 'food' : 'drink',
@@ -57,7 +59,7 @@ const RecipeDetailProvider = ({ children }) => {
   return (
     <RecipeDetailContext.Provider
       value={ {
-        recipeDone, setRecipeDone, recipeObject, currentRecipe,
+        recipeDone, setRecipeDoneFunc, recipeObject, currentRecipe,
       } }
     >
       { children }
