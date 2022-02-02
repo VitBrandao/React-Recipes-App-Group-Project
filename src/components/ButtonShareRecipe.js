@@ -13,7 +13,9 @@ const ButtonShareRecipe = () => {
   });
 
   const handleShareButton = () => {
-    copy(global.location.href)
+    const link = global.location.href.split('/in-')[0];
+
+    copy(link)
       .then(() => toastLink());
   };
 
