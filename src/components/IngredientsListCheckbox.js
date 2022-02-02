@@ -6,7 +6,11 @@ import IngredientsItemCheckbox from './IngredientsItemCheckbox';
 
 const IngredientsListCheckbox = () => {
   const { id } = useParams();
-  const { currentRecipe, recipeObject: { type } } = useContext(RecipeDetailContext);
+  const {
+    currentRecipe,
+    recipeObject: { type },
+    setRecipeDone,
+  } = useContext(RecipeDetailContext);
   const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes')) || {};
   const recipeType = type === 'food' ? 'meals' : 'cocktails';
   const [ingredientsChecked, setIngredientsChecked] = useState(
@@ -41,6 +45,12 @@ const IngredientsListCheckbox = () => {
 
     localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
   };
+
+  if (type !== ''
+  && ingredients.length === ingredientsChecked.length
+  && inProgressRecipes?.[recipeType]?.[id]) {
+    setRecipeDone(true);
+  }
 
   if (ingredients.length === 0) {
     return (

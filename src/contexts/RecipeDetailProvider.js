@@ -23,6 +23,7 @@ const types = {
 
 const RecipeDetailProvider = ({ children }) => {
   const [currentRecipe, setCurrentRecipe] = useState({});
+  const [recipeDone, setRecipeDone] = useState(false);
   const { pathname } = useLocation();
   const { id } = useParams();
   const recipeType = (
@@ -54,7 +55,11 @@ const RecipeDetailProvider = ({ children }) => {
   };
 
   return (
-    <RecipeDetailContext.Provider value={ { recipeObject, currentRecipe } }>
+    <RecipeDetailContext.Provider
+      value={ {
+        recipeDone, setRecipeDone, recipeObject, currentRecipe,
+      } }
+    >
       { children }
     </RecipeDetailContext.Provider>
   );
