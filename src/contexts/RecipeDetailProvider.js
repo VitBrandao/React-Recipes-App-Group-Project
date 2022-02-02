@@ -36,7 +36,8 @@ const RecipeDetailProvider = ({ children }) => {
       URL = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
     }
     defaultApi(URL)
-      .then((response) => setCurrentRecipe(response[recipeType][0]));
+      .then((response) => setCurrentRecipe(response[recipeType][0]))
+      .catch((e) => console.log(e));
   }, [id, recipeType]);
 
   const currentRecipeName = currentRecipe?.[types[recipeType].nameType];
