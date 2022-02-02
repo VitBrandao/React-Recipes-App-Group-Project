@@ -1,4 +1,4 @@
-import { AspectRatio, Image, Link } from '@chakra-ui/react';
+import { AspectRatio } from '@chakra-ui/react';
 import React, { useContext } from 'react';
 import RecipeDetailContext from '../contexts/RecipeDetailContext';
 
@@ -12,16 +12,13 @@ const VideoRecipe = () => {
       {
         type === 'food' && strYoutube && (
           <AspectRatio m="4" maxW="full">
-            <Link
-              href={ strYoutube }
-              isExternal
-            >
-              <Image
-                src={
-                  `https://i.ytimg.com/vi_webp/${strYoutube.split('v=')[1]}/maxresdefault.webp`
-                }
-              />
-            </Link>
+            <iframe
+              title="Video da receita"
+              data-testid="video"
+              src={
+                `https://www.youtube.com/embed/${strYoutube.split('v=')[1]}`
+              }
+            />
           </AspectRatio>
         )
       }
