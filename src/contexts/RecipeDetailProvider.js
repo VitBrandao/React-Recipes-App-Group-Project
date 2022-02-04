@@ -44,6 +44,10 @@ const RecipeDetailProvider = ({ children }) => {
   const currentRecipeName = currentRecipe?.[types[recipeType].nameType];
   const currentRecipeImage = currentRecipe?.[types[recipeType].thumbType];
 
+  const date = `${new Date().getDate()}/${(new Date()
+    .getMonth() + 1)}/${new Date().getFullYear()}`;
+  console.log(date);
+
   const setRecipeDoneFunc = (bool) => setRecipeDone(bool);
 
   const recipeObject = {
@@ -54,6 +58,8 @@ const RecipeDetailProvider = ({ children }) => {
     alcoholicOrNot: currentRecipe?.strAlcoholic || '',
     name: currentRecipeName || '',
     image: currentRecipeImage || '',
+    tags: currentRecipe?.strTags || '',
+    date,
   };
 
   return (
