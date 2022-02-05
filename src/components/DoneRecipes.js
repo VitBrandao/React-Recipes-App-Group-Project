@@ -109,8 +109,8 @@ const DoneRecipes = () => {
           category,
           alcoholicOrNot,
           type,
-          tags,
           doneDate,
+          tags,
         },
         index) => (
           <div key={ id }>
