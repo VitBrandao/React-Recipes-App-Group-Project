@@ -30,7 +30,7 @@ function ExploreIngridientsByDrinkPage() {
       <h1 data-testid="page-title">Explore Ingredients</h1>
 
       {ingredientsList.length === 0 ? (
-        'null'
+        null
       ) : (
         createIngredientsList()
       )}
@@ -38,14 +38,18 @@ function ExploreIngridientsByDrinkPage() {
       <div>
         {ingredientsByName.map((ingredient, index) => (
           <div key={ ingredient } data-testid={ `${index}-ingredient-card` }>
-            <img
-              data-testid={ `${index}-card-img` }
-              src={ `https://www.thecocktaildb.com/images/ingredients/${ingredient}-Small.png` }
-              alt={ ingredient }
-            />
-            <p data-testid={ `${index}-card-name` }>
-              {ingredient}
-            </p>
+            <a
+              href={ `/drinks?${ingredient}` }
+            >
+              <img
+                data-testid={ `${index}-card-img` }
+                src={ `https://www.thecocktaildb.com/images/ingredients/${ingredient}-Small.png` }
+                alt={ ingredient }
+              />
+              <p data-testid={ `${index}-card-name` }>
+                {ingredient}
+              </p>
+            </a>
           </div>))}
       </div>
 
