@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
+import copy from 'clipboard-copy';
 import shareIcon from '../images/shareIcon.svg';
 
 const DoneRecipes = () => {
@@ -39,7 +40,7 @@ const DoneRecipes = () => {
 
   const [clipboard, setClipboard] = useState(false);
 
-  const handleCopy = () => {
+  const handleCopy = (type, id) => {
     const url = `http://localhost:3000/${type}s/${id}`;
     if (url) {
       copy(url);
@@ -104,12 +105,12 @@ const DoneRecipes = () => {
         .map(({ id,
           image,
           name,
-          area,
+          nationality,
           category,
           alcoholicOrNot,
           type,
           tags,
-          date,
+          doneDate,
         },
         index) => (
           <div key={ id }>
@@ -125,7 +126,7 @@ const DoneRecipes = () => {
               />
             </button>
             <p data-testid={ `${index}-horizontal-top-text` }>
-              { `${area} - ${category}`}
+              { `${nationality} - ${category}`}
               { alcoholicOrNot }
             </p>
             <button
@@ -137,7 +138,7 @@ const DoneRecipes = () => {
               </h3>
             </button>
             <p data-testid={ `${index}-horizontal-done-date` }>
-              Feita em:
+              {`Feita em: ${doneDate}`}
             </p>
             { tags && tags.map((eachTag, i) => (
               <p
@@ -146,16 +147,11 @@ const DoneRecipes = () => {
               >
                 { eachTag }
               </p>)) }
-            <p data-testid={ `${index}-horizontal-done-date` }>
-              {
-                date
-              }
-            </p>
             <div>
               <button
                 type="button"
                 data-testid={ `${index}-horizontal-share-btn` }
-                onClick={ handleCopy }
+                onClick={ () => handleCopy(type, id) }
                 src={ shareIcon }
               >
                 <img src={ shareIcon } alt="Share" />
