@@ -48,6 +48,33 @@ function ExploreFoodsNationalitiesPage({ history }) {
     }
   };
 
+  // Estado e onChange para capturar valor do dropdown
+  const [dropdownValue, setDropdownValue] = useState('All');
+  const handleDropdownChange = ({ target }) => {
+    setDropdownValue(target.value);
+  };
+
+  // Função de filtragem de acordo com dropdown
+  const filterMealList = (list) => {
+    if (list.length === 0) {
+      return null;
+    }
+
+    const filterList = list.meals.filter((meal) => (
+      meal.strArea.includes(dropdownValue)
+    ));
+
+    return filterList.map((meal, index) => (
+      <Cards
+        img={ meal.strMealThumb }
+        name={ meal.strMeal }
+        key={ meal }
+        index={ index }
+        onClick={ () => history.push(`/foods/${meal.idMeal}`) }
+      />
+    ));
+  };
+
   return (
     <div>
       <Header showSearchButton />
@@ -65,7 +92,10 @@ function ExploreFoodsNationalitiesPage({ history }) {
         nationsByName.length === 0 ? (
           null
         ) : (
-          <select data-testid="explore-by-nationality-dropdown">
+          <select
+            data-testid="explore-by-nationality-dropdown"
+            onChange={ handleDropdownChange }
+          >
             {nationsByName.map((nation) => (
               <option
                 value={ nation }
@@ -87,10 +117,8 @@ function ExploreFoodsNationalitiesPage({ history }) {
         )
       }
 
-      {
-        firstMeals.length === 0 ? (
-          null
-        ) : (
+      { // LISTA DE RECEITAS - CARDS
+        firstMeals.length !== 0 && dropdownValue === 'All' ? (
           <div>
             {
               firstMeals.map((meal, index) => (
@@ -103,6 +131,10 @@ function ExploreFoodsNationalitiesPage({ history }) {
                 />
               ))
             }
+          </div>
+        ) : (
+          <div>
+            {filterMealList(mealsList)}
           </div>
         )
       }
