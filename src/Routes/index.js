@@ -13,6 +13,7 @@ import InProgressPage from '../pages/InProgressPage';
 import LoginPage from '../pages/LoginPage';
 import ProfilePage from '../pages/ProfilePage';
 import MainRecipes from '../pages/MainRecipes';
+import NotFound from '../components/NotFound';
 
 const Routes = () => (
   <div>
@@ -42,6 +43,11 @@ const Routes = () => (
       exact
       path="/explore/foods/nationalities"
       component={ ExploreFoodsNationalitiesPage }
+    />
+    <Route
+      exact
+      path="/explore/drinks/nationalities"
+      component={ NotFound }
     />
     <Route exact path="/profile" component={ ProfilePage } />
   </div>
