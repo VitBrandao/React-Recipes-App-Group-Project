@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import defaultApi from '../services';
+import Cards from '../components/Cards';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 
-function ExploreFoodsNationalitiesPage() {
+function ExploreFoodsNationalitiesPage({ history }) {
   // Estado para fetch geral
   const [mealsList, setMealsList] = useState([]);
+  const firstMeals = [];
 
   // Estado para nacionalidades
   const [nationsList, setNationsList] = useState([]);
@@ -37,6 +40,14 @@ function ExploreFoodsNationalitiesPage() {
     list.meals.map((nation) => nationsByName.push(nation.strArea));
   };
 
+  // Criando lista de exibição inicial de receitas
+  const createInitialList = (list) => {
+    const limit = 11;
+    for (let index = 0; index <= limit; index += 1) {
+      firstMeals.push(list.meals[index]);
+    }
+  };
+
   return (
     <div>
       <Header showSearchButton />
@@ -47,7 +58,6 @@ function ExploreFoodsNationalitiesPage() {
           null
         ) : (
           createDropdownList(nationsList)
-          // console.log(nationsList.meals[0])
         )
       }
 
@@ -62,16 +72,49 @@ function ExploreFoodsNationalitiesPage() {
                 key={ nation }
                 data-testid={ `${nation}-option` }
               >
-                { nation }
+                {nation}
               </option>
             ))}
           </select>
         )
       }
-      {mealsList.length === 0 ? null : console.log(mealsList)}
+
+      { // Criando lista inicial de receitas com 12 itens
+        mealsList.length === 0 ? (
+          null
+        ) : (
+          createInitialList(mealsList)
+        )
+      }
+
+      {
+        firstMeals.length === 0 ? (
+          null
+        ) : (
+          <div>
+            {
+              firstMeals.map((meal, index) => (
+                <Cards
+                  img={ meal.strMealThumb }
+                  name={ meal.strMeal }
+                  key={ meal.idMeal }
+                  index={ index }
+                  onClick={ () => history.push(`/foods/${meal.idMeal}`) }
+                />
+              ))
+            }
+          </div>
+        )
+      }
       <Footer />
     </div>
   );
 }
+
+ExploreFoodsNationalitiesPage.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
+};
 
 export default ExploreFoodsNationalitiesPage;
