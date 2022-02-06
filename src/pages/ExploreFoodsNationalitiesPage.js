@@ -75,6 +75,13 @@ function ExploreFoodsNationalitiesPage({ history }) {
     ));
   };
 
+  // Fetch final - para URL de nacionalidades
+  // const findNationalFoods = async () => {
+  //   const URL = `www.themealdb.com/api/json/v1/1/filter.php?a=${dropdownValue}`;
+  //   const findNationFoods = await defaultApi(URL);
+  //   filterMealList(findNationFoods.meals);
+  // };
+
   return (
     <div>
       <Header showSearchButton />
@@ -134,7 +141,7 @@ function ExploreFoodsNationalitiesPage({ history }) {
           </div>
         ) : (
           <div>
-            {filterMealList(mealsList)}
+            { filterMealList(mealsList) }
           </div>
         )
       }
