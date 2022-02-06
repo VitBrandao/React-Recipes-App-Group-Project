@@ -4,6 +4,7 @@ import defaultApi from '../services';
 import Cards from '../components/Cards';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import FilterByNationality from '../components/FilterByNationality';
 
 function ExploreFoodsNationalitiesPage({ history }) {
   // Estado para fetch geral
@@ -54,33 +55,16 @@ function ExploreFoodsNationalitiesPage({ history }) {
     setDropdownValue(target.value);
   };
 
-  // Função de filtragem de acordo com dropdown
-  const filterMealList = (list) => {
-    if (list.length === 0) {
-      return null;
-    }
-
-    const filterList = list.meals.filter((meal) => (
-      meal.strArea.includes(dropdownValue)
-    ));
-
-    return filterList.map((meal, index) => (
-      <Cards
-        img={ meal.strMealThumb }
-        name={ meal.strMeal }
-        key={ meal }
-        index={ index }
-        onClick={ () => history.push(`/foods/${meal.idMeal}`) }
+  const filterByIngredients = () => (
+    dropdownValue === 'All' ? (
+      null
+    ) : (
+      <FilterByNationality
+        dropdownValue={ dropdownValue }
+        history={ history }
       />
-    ));
-  };
-
-  // Fetch final - para URL de nacionalidades
-  // const findNationalFoods = async () => {
-  //   const URL = `www.themealdb.com/api/json/v1/1/filter.php?a=${dropdownValue}`;
-  //   const findNationFoods = await defaultApi(URL);
-  //   filterMealList(findNationFoods.meals);
-  // };
+    )
+  );
 
   return (
     <div>
@@ -141,7 +125,7 @@ function ExploreFoodsNationalitiesPage({ history }) {
           </div>
         ) : (
           <div>
-            { filterMealList(mealsList) }
+            { filterByIngredients() }
           </div>
         )
       }
