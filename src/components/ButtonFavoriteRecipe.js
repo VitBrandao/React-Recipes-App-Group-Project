@@ -10,6 +10,9 @@ const ButtonFavoriteRecipe = () => {
   const [favoritedRecipe, setFavoritedRecipe] = useState(false);
   const { id } = useParams();
 
+  delete recipe.tags;
+  delete recipe.doneDate;
+
   useEffect(() => {
     const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
     const isFavorite = favoriteRecipes.some(({ id: idRecipe }) => idRecipe === id);
