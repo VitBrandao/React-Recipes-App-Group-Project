@@ -7,14 +7,13 @@ function FilterByNationality({ dropdownValue, history }) {
   // Estado para guardar retorno do fetch
   const [foodsByNationality, setFoodsByNationality] = useState([]);
 
+  // Garantindo que, no máximo, 12 cards serão renderizados
   const reduceArray = (array) => {
-    console.log('chegou');
     const finalArray = [];
     const magicNumber = 12;
     for (let index = 0; index < magicNumber; index += 1) {
-      finalArray.push(array.meals[index]);
+      finalArray.push(array[index]);
     }
-
     return finalArray;
   };
 
@@ -24,12 +23,12 @@ function FilterByNationality({ dropdownValue, history }) {
     const findNationFoods = await defaultApi(URL);
 
     const lengthLimit = 12;
-    const finalObject = findNationFoods.length > lengthLimit ? (
-      reduceArray(findNationFoods)
+    const finalObject = findNationFoods.meals.length > lengthLimit ? (
+      reduceArray(findNationFoods.meals)
     ) : (
-      findNationFoods
+      findNationFoods.meals
     );
-    console.log(finalObject);
+
     setFoodsByNationality(finalObject);
   };
 
@@ -45,7 +44,7 @@ function FilterByNationality({ dropdownValue, history }) {
         foodsByNationality.length === 0 ? (
           null
         ) : (
-          foodsByNationality.meals.map((food, index) => (
+          foodsByNationality.map((food, index) => (
             <Cards
               key={ food.strMeal }
               img={ food.strMealThumb }
