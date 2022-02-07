@@ -87,7 +87,7 @@ function MainRecipes({ location: { pathname }, history: { push } }) {
       .then(({ [currResult]: array }) => (array === null ? notFoundAlert()
         : colocarReceitas(array.slice(0, optionsLength))))
       .catch((e) => e);
-  }, [currType, currCategory, currResult, searchURL]);
+  }, [currType, currCategory, currResult, searchURL, search]);
 
   function createCategories(list) {
     const newList = [{ strCategory: 'All' }, ...list];
