@@ -55,9 +55,10 @@ function ExploreFoodsNationalitiesPage({ history }) {
     setDropdownValue(target.value);
   };
 
+  // Criando filtragem por nacionalidades em componente externo
   const filterByIngredients = () => (
     dropdownValue === 'All' ? (
-      null
+      <h2> Loading ...</h2>
     ) : (
       <FilterByNationality
         dropdownValue={ dropdownValue }

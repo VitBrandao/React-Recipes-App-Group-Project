@@ -1,8 +1,10 @@
-// import React from 'react';
+import React from 'react';
 
 function NotFound() {
   return (
-    new Error('Not Found')
+    <div>
+      <h2>Not Found</h2>
+    </div>
   );
 }
 

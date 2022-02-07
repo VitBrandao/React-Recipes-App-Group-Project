@@ -17,32 +17,43 @@ function FilterByNationality({ dropdownValue, history }) {
     return finalArray;
   };
 
-  // Função do fetch
-  const fetchByNationality = async () => {
-    const URL = `https://www.themealdb.com/api/json/v1/1/filter.php?a=${dropdownValue}`;
-    const findNationFoods = await defaultApi(URL);
-
-    const lengthLimit = 12;
-    const finalObject = findNationFoods.meals.length > lengthLimit ? (
-      reduceArray(findNationFoods.meals)
-    ) : (
-      findNationFoods.meals
-    );
-
-    setFoodsByNationality(finalObject);
-  };
-
   // componentDidMount
-  useEffect(() => { fetchByNationality(); }, []);
+  useEffect(() => {
+    const fetchByNationality = async () => {
+      const URL = `https://www.themealdb.com/api/json/v1/1/filter.php?a=${dropdownValue}`;
+      const findNationFoods = await defaultApi(URL);
+      const lengthLimit = 12;
+      const finalObject = findNationFoods.meals.length > lengthLimit ? (
+        reduceArray(findNationFoods.meals)
+      ) : (
+        findNationFoods.meals
+      );
+      setFoodsByNationality(finalObject);
+    };
+    fetchByNationality();
+  }, [setFoodsByNationality, dropdownValue]);
 
   // componentDidUpdate (necessário para quando o usuário troca de uma nacionalidade para outra no dropdown)
-  useEffect(() => { fetchByNationality(); });
+  useEffect(() => {
+    const fetchByNationality = async () => {
+      const URL = `https://www.themealdb.com/api/json/v1/1/filter.php?a=${dropdownValue}`;
+      const findNationFoods = await defaultApi(URL);
+      const lengthLimit = 11;
+      const finalObject = findNationFoods.meals.length >= lengthLimit ? (
+        reduceArray(findNationFoods.meals)
+      ) : (
+        findNationFoods.meals
+      );
+      setFoodsByNationality(finalObject);
+    };
+    fetchByNationality();
+  });
 
   return (
     <div>
       {
         foodsByNationality.length === 0 ? (
-          null
+          <span> Loading... </span>
         ) : (
           foodsByNationality.map((food, index) => (
             <Cards
