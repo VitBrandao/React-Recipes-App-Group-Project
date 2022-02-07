@@ -17,7 +17,7 @@ function FilterByNationality({ dropdownValue, history }) {
     return finalArray;
   };
 
-  // componentDidMount
+  // componentDidMount e componentDidUpdate
   useEffect(() => {
     const fetchByNationality = async () => {
       const URL = `https://www.themealdb.com/api/json/v1/1/filter.php?a=${dropdownValue}`;
@@ -32,22 +32,6 @@ function FilterByNationality({ dropdownValue, history }) {
     };
     fetchByNationality();
   }, [setFoodsByNationality, dropdownValue]);
-
-  // componentDidUpdate (necessário para quando o usuário troca de uma nacionalidade para outra no dropdown)
-  useEffect(() => {
-    const fetchByNationality = async () => {
-      const URL = `https://www.themealdb.com/api/json/v1/1/filter.php?a=${dropdownValue}`;
-      const findNationFoods = await defaultApi(URL);
-      const lengthLimit = 11;
-      const finalObject = findNationFoods.meals.length >= lengthLimit ? (
-        reduceArray(findNationFoods.meals)
-      ) : (
-        findNationFoods.meals
-      );
-      setFoodsByNationality(finalObject);
-    };
-    fetchByNationality();
-  });
 
   return (
     <div>
