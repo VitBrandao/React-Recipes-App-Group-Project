@@ -67,6 +67,11 @@ function MainRecipes({ location: { pathname }, history: { push } }) {
       .catch((e) => e);
   }, [currType, currResult]);
 
+  const colocarReceitas = (receitas) => {
+    const novasReceitas = receitas.filter((receita) => receita?.idMeal !== '53039');
+    setRecipes(novasReceitas);
+  };
+
   useEffect(() => {
     const currSearch = search?.slice(1);
     const optionsLength = 12;
@@ -77,9 +82,10 @@ function MainRecipes({ location: { pathname }, history: { push } }) {
     } else if (searchURL !== '') URL = searchURL;
     else URL = currCategory ? `${selectedEndPoint}${currCategory}` : defaultEndPoint;
 
-    defaultApi(URL)
+    fetch(URL)
+      .then((response) => response.json())
       .then(({ [currResult]: array }) => (array === null ? notFoundAlert()
-        : setRecipes(array.slice(0, optionsLength))))
+        : colocarReceitas(array.slice(0, optionsLength))))
       .catch((e) => e);
   }, [currType, currCategory, currResult, searchURL]);
 
