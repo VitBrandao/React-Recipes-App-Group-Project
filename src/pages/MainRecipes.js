@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { useLocation } from 'react-router-dom';
 import Cards from '../components/Cards';
 import defaultApi from '../services/index';
 import Header from '../components/Header';
@@ -11,6 +12,7 @@ const types = {
     defaultEndPoint: 'https://www.themealdb.com/api/json/v1/1/search.php?s=',
     selectedEndPoint: 'https://www.themealdb.com/api/json/v1/1/filter.php?c=',
     categoriesEndPoint: 'https://www.themealdb.com/api/json/v1/1/list.php?c=list',
+    searchEndPoint: (search) => `https://www.themealdb.com/api/json/v1/1/filter.php?i=${search}`,
     thumbType: 'strMealThumb',
     nameType: 'strMeal',
     idType: 'idMeal',
@@ -21,6 +23,7 @@ const types = {
     defaultEndPoint: 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=',
     selectedEndPoint: 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=',
     categoriesEndPoint: 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list',
+    searchEndPoint: (search) => `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${search}`,
     thumbType: 'strDrinkThumb',
     nameType: 'strDrink',
     idType: 'idDrink',
@@ -53,6 +56,7 @@ function MainRecipes({ location: { pathname }, history: { push } }) {
   const currResult = pathname.endsWith('foods') ? 'meals' : 'drinks';
   const currType = types[currResult];
   const { searchURL } = useContext(RecipesContext);
+  const { search } = useLocation();
 
   useEffect(() => {
     const categoryLenght = 5;
@@ -64,10 +68,13 @@ function MainRecipes({ location: { pathname }, history: { push } }) {
   }, [currType, currResult]);
 
   useEffect(() => {
+    const currSearch = search?.slice(1);
     const optionsLength = 12;
-    const { defaultEndPoint, selectedEndPoint } = currType;
+    const { defaultEndPoint, selectedEndPoint, searchEndPoint } = currType;
     let URL;
-    if (searchURL !== '') URL = searchURL;
+    if (currSearch) {
+      URL = searchEndPoint(currSearch);
+    } else if (searchURL !== '') URL = searchURL;
     else URL = currCategory ? `${selectedEndPoint}${currCategory}` : defaultEndPoint;
 
     defaultApi(URL)
